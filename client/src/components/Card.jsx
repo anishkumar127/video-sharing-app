@@ -46,7 +46,7 @@ const Card = () => {
     <Container>
         <Image src='https://i.ytimg.com/an_webp/FztSFtwobtM/mqdefault_6s.webp?du=3000&sqp=CKWFr5sG&rs=AOn4CLAMzCAbAKTIX--mtt7cbzIVVoFO6A'/>
         <Details>
-        <ChannelImage/>
+        <ChannelImage src="https://avatars.githubusercontent.com/u/77631750?v=4"/>
         <Texts>
           <Title>Test Video</Title>
           <ChannelName>Anish Kumar</ChannelName>
