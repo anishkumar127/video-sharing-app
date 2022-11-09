@@ -19,13 +19,16 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 const Container = styled.div`
 flex:1;
-background-color:#202020;
-height:100vh;
-color:white;
+background-color:${({theme})=>theme.bg};
+/* height:100vh; */
+min-height: 100vh;
+color:${({theme})=> theme.text};
 font-size:14px;
+position: sticky;
+top:0;
 `
 const Wrapper = styled.div`
-padding:18px ,26px;
+padding:18px 26px;
 `
 const Logo = styled.div`
 display:flex;
@@ -41,14 +44,28 @@ const Item = styled.div`
 display:flex;
 align-items:center;
 gap:20px;
-cursor:pointer;
+cursor: pointer;
 padding:7.5px 0px;
 `
-const Hr = styled.div`
+const Hr = styled.hr`
 margin:15px 0px;
-border: 0.5px solid #373737
+border: 0.5px solid ${({theme}) => theme.soft};
 `
-const Menu = () => {
+const Login = styled.div``
+const Button = styled.button`
+padding:5px 15px;
+background-color:transparent;
+border:1px solid #3ea6ff;
+color:#3ea6ff;
+border-radius:3px;
+font-weight:500;
+margin-top:10px;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:5px;
+`
+const Menu = ({darkMode,setDarkMode}) => {
   return (
     <Container>
       <Wrapper>
@@ -77,6 +94,11 @@ const Menu = () => {
           <HistoryOutlinedIcon />
           History
         </Item>
+        <Hr/>
+        <Login>
+          Sign in to like videos, comment, and subscribe.
+          <Button><AccountCircleOutlinedIcon/>SIGN IN</Button>
+        </Login>
         <Hr/>
         <Item>
           <LibraryMusicOutlinedIcon />
@@ -114,6 +136,10 @@ const Menu = () => {
         <Item>
           <HelpOutlineOutlinedIcon />
           Help
+        </Item>
+        <Item onClick={()=>setDarkMode(!darkMode)}>
+          <SettingsBrightnessOutlinedIcon/>
+          Light Mode
         </Item>
       </Wrapper>
     </Container>
