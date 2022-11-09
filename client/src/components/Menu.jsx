@@ -19,7 +19,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 const Container = styled.div`
 flex:1;
-background-color:${({theme})=>theme.bg};
+background-color:${({theme})=>theme.bgLighter};
 /* height:100vh; */
 min-height: 100vh;
 color:${({theme})=> theme.text};
