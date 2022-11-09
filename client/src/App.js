@@ -8,7 +8,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-// import Home from "@mui/icons-material/Home";
 import Home from './pages/Home';
 import Video from './pages/Video';
 const Container = styled.div`
@@ -21,7 +20,7 @@ background-color:${({theme})=>theme.bg};
 `
 
 const Wrapper = styled.div`
-/* padding:22px 96px; */
+padding:22px 96px;
 `
 
 function App() {
