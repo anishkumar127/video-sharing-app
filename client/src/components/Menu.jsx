@@ -21,8 +21,8 @@ import { Link } from "react-router-dom";
 const Container = styled.div`
   flex: 1;
   background-color: ${({ theme }) => theme.bgLighter};
-  /* height:100vh; */
-  min-height: 100vh;
+  height: 100vh;
+  /* min-height: 100vh; */
   color: ${({ theme }) => theme.text};
   font-size: 14px;
   position: sticky;
@@ -47,6 +47,9 @@ const Item = styled.div`
   gap: 20px;
   cursor: pointer;
   padding: 7.5px 0px;
+  &:hover {
+    background-color: ${({ theme }) => theme.soft};
+  }
 `;
 const Hr = styled.hr`
   margin: 15px 0px;
@@ -106,10 +109,12 @@ const Menu = ({ darkMode, setDarkMode }) => {
         <Hr />
         <Login>
           Sign in to like videos, comment, and subscribe.
-          <Button>
-            <AccountCircleOutlinedIcon />
-            SIGN IN
-          </Button>
+          <Link to="signin" style={{ textDecoration: "none" }}>
+            <Button>
+              <AccountCircleOutlinedIcon />
+              SIGN IN
+            </Button>
+          </Link>
         </Login>
         <Hr />
         <Title>BEST OF YOUTUBE</Title>

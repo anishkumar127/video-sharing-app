@@ -5,6 +5,7 @@ import ThumbDownOffAltOutlinedIcon from "@mui/icons-material/ThumbDownOffAltOutl
 import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
 import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import Comments from "../components/Comments";
+import Card from "../components/Card";
 
 const Container = styled.div`
   display: flex;
@@ -134,7 +135,7 @@ const Video = () => {
         <Hr />
         <Channel>
           <ChannelInfo>
-            <Image src="https://i.ytimg.com/an_webp/FztSFtwobtM/mqdefault_6s.webp?du=3000&sqp=CKWFr5sG&rs=AOn4CLAMzCAbAKTIX--mtt7cbzIVVoFO6A" />
+            <Image src="https://avatars.githubusercontent.com/u/77631750?v=4" />
 
             <ChannelDetail>
               <ChannelName>Anish Kumar</ChannelName>
@@ -154,7 +155,20 @@ const Video = () => {
         <Hr />
         <Comments />
       </Content>
-      <Recommendation>recommendation</Recommendation>
+      <Recommendation>
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+        <Card type="sm" />
+      </Recommendation>
     </Container>
   );
 };
