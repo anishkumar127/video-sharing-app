@@ -83,9 +83,20 @@ const ChannelCounter = styled.span`
   font-size: 12px;
 `;
 
-const Description = styled.p``;
+const Description = styled.p`
+  font-size: 14px;
+`;
 
-const Subscribe = styled.button``;
+const Subscribe = styled.button`
+  background-color: #cc1a00;
+  font-weight: 500;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  height: max-content;
+  padding: 10px 20px;
+  cursor: pointer;
+`;
 const Video = () => {
   return (
     <Container>
