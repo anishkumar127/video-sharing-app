@@ -1,6 +1,6 @@
 import AccountCircleOutlined from "@mui/icons-material/AccountCircleOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import React from "react";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 const Container = styled.div`
@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  height: 100%;
   padding: 0px 20px;
   position: relative;
 `;

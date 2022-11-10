@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 14px;
+  font-size: 24px;
 `;
 
 const SubTitle = styled.h2`
@@ -35,6 +35,7 @@ const Input = styled.input`
   padding: 10px;
   background-color: transparent;
   width: 100%;
+  color: ${({ theme }) => theme.text};
 `;
 
 const Button = styled.button`
