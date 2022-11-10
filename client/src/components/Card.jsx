@@ -53,7 +53,7 @@ const Card = ({ type }) => {
       <Container type={type}>
         <Image
           type={type}
-          src="https://i.ytimg.com/an_webp/FztSFtwobtM/mqdefault_6s.webp?du=3000&sqp=CKWFr5sG&rs=AOn4CLAMzCAbAKTIX--mtt7cbzIVVoFO6A"
+          src="https://i.ytimg.com/an_webp/FztSFtwobtM/mqdefault_6s.webp?du=3000&sqp=CLy7tJsG&rs=AOn4CLBAwQ_uH3BrDBGlsF9CGqFcPSAORQ"
         />
         <Details type={type}>
           <ChannelImage
