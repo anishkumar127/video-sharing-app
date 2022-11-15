@@ -12,16 +12,16 @@ const Home = ({ type }) => {
   useEffect(() => {
     const fetchVideos = async () => {
       // const res = await axios.get("/videos/random");
-      const res = await axios.get("http://localhost:8800/api/videos/random");
+      const res = await axios.get(`http://localhost:8800/api/videos/${type}`);
       setVideos(res.data);
     };
     fetchVideos();
-  }, []);
+  }, [type]);
 
   return (
     <Container>
       {videos.map((video) => (
-        <Card />
+        <Card key={video._id} video={video} />
       ))}
     </Container>
   );
