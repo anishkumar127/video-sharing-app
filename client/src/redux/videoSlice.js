@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export const videoSlice = createSlice({
-  name: "user",
+  name: "video",
   initialState,
   reducers: {
     loginStart: (state) => {
