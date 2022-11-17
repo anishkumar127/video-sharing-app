@@ -14,7 +14,8 @@ import { dislike, fetchSuccess, like } from "../redux/videoSlice";
 
 import { subscription } from "../redux/userSlice";
 import Recommendation from "../components/Recommendation";
-// import TimeAgo from "timeago-react";
+
+import { format } from "timeago.js";
 
 const Container = styled.div`
   display: flex;
@@ -118,6 +119,7 @@ const Video = () => {
   const path = useLocation().pathname.split("/")[2];
 
   const [channel, setChannel] = useState({});
+  // const [viewInc, setViewInc] = useState();
   // localhost:8800/api/videos/view/63737dce1fdf7cc8f9245745
   useEffect(() => {
     const fetchData = async () => {
@@ -125,6 +127,7 @@ const Video = () => {
         const videoRes = await axios.get(
           `https://api-server-1edp.onrender.com/api/videos/find/${path}`
         );
+
         const channelRes = await axios.get(
           `https://api-server-1edp.onrender.com/api/users/find/${videoRes.data.userId}`
         );
@@ -162,8 +165,7 @@ const Video = () => {
         <Title>{currentVideo?.title}</Title>
         <Details>
           <Info>
-            {currentVideo?.views} views •
-            {/* <TimeAgo datetime={currentVideo?.createdAt} /> */}
+            {currentVideo?.views} views •{format(currentVideo?.createdAt)}
           </Info>
           <Buttons>
             <Button onClick={handleLike}>

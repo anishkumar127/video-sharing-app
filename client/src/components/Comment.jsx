@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-// import TimeAgo from "timeago-react";
 
+import { format } from "timeago.js";
 const Container = styled.div`
   display: flex;
   gap: 10px;
@@ -55,8 +55,7 @@ const Comment = ({ comment }) => {
       <Avatar src={channel.img} />
       <Details>
         <Name>
-          {channel.name}{" "}
-          <Date> {/* <TimeAgo datetime={channel.createdAt} /> */}</Date>
+          {channel.name} <Date> {format(channel.createdAt)}</Date>
         </Name>
         <Text>{comment.desc}</Text>
       </Details>
