@@ -40,9 +40,9 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("api is running...");
-});
+// app.get("/", (req, res) => {
+//   res.send("api is running...");
+// });
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
