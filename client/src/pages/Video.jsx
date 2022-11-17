@@ -7,7 +7,6 @@ import AddTaskOutlinedIcon from "@mui/icons-material/AddTaskOutlined";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import Comments from "../components/Comments";
-import Card from "../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -15,9 +14,7 @@ import { dislike, fetchSuccess, like } from "../redux/videoSlice";
 
 import { subscription } from "../redux/userSlice";
 import Recommendation from "../components/Recommendation";
-import TimeAgo from "timeago-react";
-
-import * as timeago from "timeago.js";
+// import TimeAgo from "timeago-react";
 
 const Container = styled.div`
   display: flex;
@@ -131,6 +128,7 @@ const Video = () => {
         const channelRes = await axios.get(
           `https://api-server-1edp.onrender.com/api/users/find/${videoRes.data.userId}`
         );
+
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
       } catch (err) {}
@@ -165,7 +163,7 @@ const Video = () => {
         <Details>
           <Info>
             {currentVideo?.views} views •
-            <TimeAgo datetime={currentVideo?.createdAt} />
+            {/* <TimeAgo datetime={currentVideo?.createdAt} /> */}
           </Info>
           <Buttons>
             <Button onClick={handleLike}>
