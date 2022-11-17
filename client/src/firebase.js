@@ -1,6 +1,5 @@
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-//   apiKey: process.env.REACT_APP_apiKey,
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
   authDomain: "video-sharing-app-f6cfa.firebaseapp.com",
