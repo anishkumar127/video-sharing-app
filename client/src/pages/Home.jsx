@@ -15,13 +15,14 @@ const Home = ({ type }) => {
       // const res = await axios.get(`http://localhost:5000/api/videos/${type}`);
       const res = await axios.get(`/videos/${type}`);
       setVideos(res.data);
+      console.log(res.data);
     };
     fetchVideos();
   }, [type]);
 
   return (
     <Container>
-      {videos?.map((video) => (
+      {Array.from(videos).map((video) => (
         <Card key={video._id} video={video} />
       ))}
     </Container>
