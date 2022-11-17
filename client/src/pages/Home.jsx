@@ -15,7 +15,7 @@ const Home = ({ type }) => {
       // const res = await axios.get(`http://localhost:5000/api/videos/${type}`);
       const res = await axios.get(`/videos/${type}`);
       setVideos(res.data);
-      // console.log(res.data);
+      console.log(res.data);
     };
     fetchVideos();
   }, [type]);
