@@ -1,15 +1,8 @@
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-// const firebaseConfig = {
 //   apiKey: process.env.REACT_APP_apiKey,
-//   authDomain: process.env.REACT_APP_authDomain,
-//   projectId: process.env.REACT_APP_projectId,
-//   storageBucket: process.env.REACT_APP_storageBucket,
-//   messagingSenderId: process.env.REACT_APP_messagingSenderId,
-//   appId: process.env.REACT_APP_appId,
-// };
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: process.env.REACT_APP_apiKey,
   authDomain: "video-sharing-app-f6cfa.firebaseapp.com",
   projectId: "video-sharing-app-f6cfa",
   storageBucket: "video-sharing-app-f6cfa.appspot.com",

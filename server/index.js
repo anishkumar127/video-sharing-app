@@ -6,8 +6,8 @@ import videoRoutes from "./routes/videos.js";
 import commentRoutes from "./routes/comments.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
-const PORT = process.env.PORT || 8800;
 const app = express();
+const PORT = process.env.PORT || 5000;
 import cors from "cors";
 dotenv.config();
 
@@ -24,6 +24,18 @@ const connectDB = () => {
 };
 
 app.use(cors());
+// app.use(cors());
+// app.use(
+//   cors({
+//     allowedHeaders: ["sessionId", "Content-Type"],
+//     exposedHeaders: ["sessionId"],
+//     origin: "*",
+//     // origin: true,
+//     credentials: true,
+//     methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+//     preflightContinue: false,
+//   })
+// );
 // routes
 app.use(cookieParser());
 app.use(express.json());

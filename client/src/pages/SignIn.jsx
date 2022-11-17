@@ -1,10 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { loginStart, loginSuccess, loginFailure } from "../redux/userSlice.js";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+// import { async } from "@firebase/util";
 
 const Container = styled.div`
   display: flex;
@@ -73,37 +75,67 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
+
     try {
-      const res = await axios.post("http://localhost:8800/api/auth/signin", {
+      // const res = await axios.post("http://localhost:5000/api/auth/signin", {
+
+      const res = await axios.post("/auth/signin", {
         name,
         password,
       });
       dispatch(loginSuccess(res.data));
+      navigate("/");
     } catch (err) {
       dispatch(loginFailure());
     }
   };
+
+  // register
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      // const res = await axios.post("http://localhost:5000/api/auth/signup", {
+
+      const res = await axios.post("/auth/signup", {
+        name,
+        email,
+        password,
+      });
+      dispatch(loginSuccess(res.data));
+      navigate("/");
+    } catch (err) {
+      dispatch(loginFailure());
+    }
+  };
+  // google login
   const signInWithGoogle = () => {
     dispatch(loginStart());
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          .post("http://localhost:8800/api/auth/google", {
+          // .post("http://localhost:5000/api/auth/google", {
+
+          .post("/auth/google", {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,
           })
           .then((res) => {
             dispatch(loginSuccess(res.data));
+            navigate("/");
           });
       })
       .catch((error) => {
         dispatch(loginFailure());
       });
   };
+
   return (
     <Container>
       <Wrapper>
@@ -132,7 +164,7 @@ const SignIn = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button>Sign Up</Button>
+        <Button onClick={handleSignup}>Sign Up</Button>
       </Wrapper>
       <More>
         English(USA)

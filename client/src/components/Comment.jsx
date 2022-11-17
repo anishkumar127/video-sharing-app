@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { format } from "timeago.js";
 const Container = styled.div`
   display: flex;
   gap: 10px;
@@ -35,22 +37,26 @@ const Text = styled.span`
   font-size: 14px;
 `;
 
-const Comment = () => {
+const Comment = ({ comment }) => {
+  const [channel, setChannel] = useState({});
+  useEffect(() => {
+    const fetchComment = async () => {
+      // const res = await axios.get(
+      //   `http://localhost:5000/api/users/find/${comment.userId}`
+      // );
+      const res = await axios.get(`/users/find/${comment.userId}`);
+      setChannel(res.data);
+    };
+    fetchComment();
+  }, [comment.userId]);
   return (
     <Container>
-      <Avatar src="https://avatars.githubusercontent.com/u/77631750?v=4" />
+      <Avatar src={channel.img} />
       <Details>
         <Name>
-          Anish Kumar <Date>1 day ago</Date>
+          {channel.name} <Date>{format(channel.createdAt)}</Date>
         </Name>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident
-          aliquam incidunt voluptatem odio iste omnis, earum natus aperiam
-          recusandae, quidem id. Illo accusamus magni culpa porro molestiae eos,
-          ab quos repellendus quam asperiores dolore veniam atque repudiandae
-          voluptatum harum aliquam distinctio consequatur eius. Odio laboriosam
-          a et tenetur quas porro.
-        </Text>
+        <Text>{comment.desc}</Text>
       </Details>
     </Container>
   );
