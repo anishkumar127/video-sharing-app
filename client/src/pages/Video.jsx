@@ -123,10 +123,10 @@ const Video = () => {
     const fetchData = async () => {
       try {
         const videoRes = await axios.get(
-          `http://localhost:5000/api/videos/find/${path}`
+          `https://api-server-1edp.onrender.com/api/videos/find/${path}`
         );
         const channelRes = await axios.get(
-          `http://localhost:5000/api/users/find/${videoRes.data.userId}`
+          `https://api-server-1edp.onrender.com/api/users/find/${videoRes.data.userId}`
         );
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
