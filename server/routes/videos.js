@@ -11,7 +11,7 @@ import {
   trend,
   updateVideo,
 } from "../controllers/video.js";
-import { verifyToken } from "../utils/verifyToken.js";
+import { verifyToken } from "../verifyToken.js";
 const router = express.Router();
 
 // Create a video

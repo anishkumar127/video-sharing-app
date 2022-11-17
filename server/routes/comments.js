@@ -4,7 +4,7 @@ import {
   deleteComment,
   getComment,
 } from "../controllers/comment.js";
-import { verifyToken } from "../utils/verifyToken.js";
+import { verifyToken } from "../verifyToken.js";
 const router = express.Router();
 
 router.post("/", verifyToken, addComment);
