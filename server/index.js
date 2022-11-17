@@ -55,6 +55,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("api is running...");
+});
+
 app.listen(PORT, () => {
   connectDB();
   console.log("Connected to server");
