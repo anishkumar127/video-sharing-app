@@ -34,10 +34,9 @@ const Comments = ({ videoId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        // const res = await axios.get(
-        //   `http://localhost:5000/api/comments/${videoId}`
-        // );
-        const res = await axios.get(`/comments/${videoId}`);
+        const res = await axios.get(
+          `https://api-server-1edp.onrender.com/api/comments/${videoId}`
+        );
         setComments(res.data);
       } catch (err) {}
     };
