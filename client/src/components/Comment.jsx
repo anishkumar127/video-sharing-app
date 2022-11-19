@@ -42,10 +42,9 @@ const Comment = ({ comment }) => {
   const [channel, setChannel] = useState({});
   useEffect(() => {
     const fetchComment = async () => {
-      // const res = await axios.get(
-      //   `http://localhost:5000/api/users/find/${comment.userId}`
-      // );
-      const res = await axios.get(`/users/find/${comment.userId}`);
+      const res = await axios.get(
+        `https://api-server-1edp.onrender.com/api/users/find/${comment.userId}`
+      );
       setChannel(res.data);
     };
     fetchComment();

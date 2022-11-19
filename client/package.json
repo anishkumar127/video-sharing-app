@@ -46,6 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://api-server-1edp.onrender.com/api/"
+  }
 }

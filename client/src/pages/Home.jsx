@@ -7,12 +7,14 @@ const Container = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 `;
+
 const Home = ({ type }) => {
-  const [Videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
-      // const res = await axios.get(`http://localhost:5000/api/videos/${type}`);
-      const res = await axios.get(`/videos/${type}`);
+      const res = await axios.get(
+        `https://api-server-1edp.onrender.com/api/videos/${type}`
+      );
       setVideos(res.data);
     };
     fetchVideos();
@@ -20,17 +22,14 @@ const Home = ({ type }) => {
 
   return (
     <Container>
-      {/* {Array.from(videos)
-        ? Array.from(videos).map((video) => (
-            <Card key={video._id} video={video} />
-          ))
-        : null} */}
-      {/* {Array.from(Videos).map((video) => (
-        <Card key={video._id} video={video} />
-      ))} */}
-      {Videos.map((video) => (
-        <Card key={video._id} video={video} />
-      ))}
+      {videos && videos.length > 0 ? (
+        videos.map((video) => <Card key={video._id} video={video} />)
+      ) : (
+        <>
+          No videos found...due to slow database server issue. please wait a
+          while.
+        </>
+      )}
     </Container>
   );
 };

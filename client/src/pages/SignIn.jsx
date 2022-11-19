@@ -6,7 +6,6 @@ import { loginStart, loginSuccess, loginFailure } from "../redux/userSlice.js";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-// import { async } from "@firebase/util";
 
 const Container = styled.div`
   display: flex;
@@ -81,12 +80,13 @@ const SignIn = () => {
     dispatch(loginStart());
 
     try {
-      // const res = await axios.post("http://localhost:5000/api/auth/signin", {
-
-      const res = await axios.post("/auth/signin", {
-        name,
-        password,
-      });
+      const res = await axios.post(
+        "https://api-server-1edp.onrender.com/api/auth/signin",
+        {
+          name,
+          password,
+        }
+      );
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
@@ -100,13 +100,14 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      // const res = await axios.post("http://localhost:5000/api/auth/signup", {
-
-      const res = await axios.post("/auth/signup", {
-        name,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://api-server-1edp.onrender.com/api/auth/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
@@ -119,9 +120,7 @@ const SignIn = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         axios
-          // .post("http://localhost:5000/api/auth/google", {
-
-          .post("/auth/google", {
+          .post("https://api-server-1edp.onrender.com/api/auth/google", {
             name: result.user.displayName,
             email: result.user.email,
             img: result.user.photoURL,

@@ -16,10 +16,9 @@ const Search = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      //   const res = await axios.get(
-      //     `http://localhost:5000/api/videos/search${query}`
-      //   );
-      const res = await axios.get(`/videos/search${query}`);
+      const res = await axios.get(
+        `https://api-server-1edp.onrender.com/api/videos/search${query}`
+      );
       setVideos(res.data);
     };
     fetchVideos();
