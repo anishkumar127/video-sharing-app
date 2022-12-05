@@ -10,7 +10,7 @@ import Comments from "../components/Comments";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { dislike, fetchSuccess, like } from "../redux/videoSlice";
+import { dislike, fetchSuccess, like, views } from "../redux/videoSlice";
 
 import { subscription } from "../redux/userSlice";
 import Recommendation from "../components/Recommendation";
@@ -133,24 +133,34 @@ const Video = () => {
 
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+        return "opps something went wrong!";
+      }
     };
     fetchData();
   }, [path, dispatch]);
 
-  if (!currentUser) return "Loading....";
-
   const handleLike = async () => {
-    await axios.put(
-      `https://api-server-1edp.onrender.com/api/users/like/${currentVideo._id}`
-    );
-    dispatch(like(currentUser._id));
+    try {
+      await axios.put(
+        `https://api-server-1edp.onrender.com/api/users/like/${currentVideo?._id}`
+      );
+      dispatch(like(currentUser._id));
+    } catch (err) {
+      console.log(err);
+      return "opps something went wrong!";
+    }
   };
   const handleDislike = async () => {
-    await axios.put(
-      `https://api-server-1edp.onrender.com/api/users/dislike/${currentVideo._id}`
-    );
-    dispatch(dislike(currentUser._id));
+    try {
+      await axios.put(
+        `https://api-server-1edp.onrender.com/api/users/dislike/${currentVideo?._id}`
+      );
+      dispatch(dislike(currentUser._id));
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleSub = async () => {
     currentUser.subscribedUsers.includes(channel._id)
@@ -163,6 +173,7 @@ const Video = () => {
     dispatch(subscription(channel._id));
   };
 
+  if (!currentUser) return "Loading....";
   return (
     <Container>
       <Content>
@@ -176,12 +187,12 @@ const Video = () => {
           </Info>
           <Buttons>
             <Button onClick={handleLike}>
-              {currentVideo.likes?.includes(currentUser?._id) ? (
+              {currentVideo?.likes?.includes(currentUser?._id) ? (
                 <ThumbUpIcon />
               ) : (
                 <ThumbUpOutlinedIcon />
               )}{" "}
-              {currentVideo.likes?.length}
+              {currentVideo?.likes?.length}
             </Button>
             <Button onClick={handleDislike}>
               {currentVideo.dislikes?.includes(currentUser?._id) ? (
