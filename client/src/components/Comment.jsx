@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -42,9 +43,7 @@ const Comment = ({ comment }) => {
   const [channel, setChannel] = useState({});
   useEffect(() => {
     const fetchComment = async () => {
-      const res = await axios.get(
-        `https://api-server-1edp.onrender.com/api/users/find/${comment.userId}`
-      );
+      const res = await axiosInstance.get(`/users/find/${comment.userId}`);
       setChannel(res.data);
     };
     fetchComment();

@@ -10,8 +10,8 @@ import Comments from "../components/Comments";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import { dislike, fetchSuccess, like, views } from "../redux/videoSlice";
-
+import { fetchSuccess, like, dislike } from "../redux/videoSlice";
+import axiosInstance from "../axios";
 import { subscription } from "../redux/userSlice";
 import Recommendation from "../components/Recommendation";
 
@@ -112,25 +112,44 @@ const VideoFrame = styled.video`
   width: 100%;
   object-fit: cover;
 `;
+
 const Video = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { currentVideo } = useSelector((state) => state.video);
   const dispatch = useDispatch();
   const path = useLocation().pathname.split("/")[2];
-
+  // console.log(currentVideo); // getting null
   const [channel, setChannel] = useState({});
-  // const [viewInc, setViewInc] = useState();
-  // localhost:8800/api/videos/view/63737dce1fdf7cc8f9245745
+
+  /*
+  // console.log(path); ok hai video user id aa rahi hai.
+  // its working its getting all the data.
+  const test = async () => {
+    const isWorking = await axios.get(
+      "http://localhost:5000/api/videos/find/63931e44de7c22e61c4ffd6c"
+      );
+      console.log(isWorking.data);
+      console.log(isWorking.data.videoUrl);
+    };
+    const videoRes = test();
+    console.log(videoRes);
+
+    */
+
+  // {withCredentials: true}
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const videoRes = await axios.get(
-          `https://api-server-1edp.onrender.com/api/videos/find/${path}`
+        const videoRes = await axiosInstance.get(`/videos/find/${path}`, {
+          withCredentials: true,
+        });
+        // console.log(videoRes);
+        const updatedView = await axiosInstance.put(`videos/view/${path}`);
+        // console.log(updatedView.data, "view is updating");
+        const channelRes = await axiosInstance.get(
+          `/users/find/${videoRes.data.userId}`,
+          { withCredentials: true }
         );
-        const channelRes = await axios.get(
-          `https://api-server-1edp.onrender.com/api/users/find/${videoRes.data.userId}`
-        );
-
         setChannel(channelRes.data);
         dispatch(fetchSuccess(videoRes.data));
       } catch (err) {
@@ -143,9 +162,9 @@ const Video = () => {
 
   const handleLike = async () => {
     try {
-      await axios.put(
-        `https://api-server-1edp.onrender.com/api/users/like/${currentVideo?._id}`
-      );
+      await axiosInstance.put(`/users/like/${currentVideo._id}`, {
+        withCredentials: true,
+      });
       dispatch(like(currentUser._id));
     } catch (err) {
       console.log(err);
@@ -154,9 +173,9 @@ const Video = () => {
   };
   const handleDislike = async () => {
     try {
-      await axios.put(
-        `https://api-server-1edp.onrender.com/api/users/dislike/${currentVideo?._id}`
-      );
+      await axiosInstance.put(`/users/dislike/${currentVideo._id}`, {
+        withCredentials: true,
+      });
       dispatch(dislike(currentUser._id));
     } catch (err) {
       console.log(err);
@@ -164,12 +183,12 @@ const Video = () => {
   };
   const handleSub = async () => {
     currentUser.subscribedUsers.includes(channel._id)
-      ? await axios.put(
-          `https://api-server-1edp.onrender.com/api/users/unsub/${channel._id}`
-        )
-      : await axios.put(
-          `https://api-server-1edp.onrender.com/api/users/sub/${channel._id}`
-        );
+      ? await axiosInstance.put(`/users/unsub/${channel._id}`, {
+          withCredentials: true,
+        })
+      : await axiosInstance.put(`/users/sub/${channel._id}`, {
+          withCredentials: true,
+        });
     dispatch(subscription(channel._id));
   };
 
@@ -186,16 +205,16 @@ const Video = () => {
             {currentVideo?.views} views •{format(currentVideo?.createdAt)}
           </Info>
           <Buttons>
-            <Button onClick={handleLike}>
-              {currentVideo?.likes?.includes(currentUser?._id) ? (
+            <Button onClick={() => handleLike()}>
+              {currentVideo?.likes.includes(currentUser._id) ? (
                 <ThumbUpIcon />
               ) : (
                 <ThumbUpOutlinedIcon />
               )}{" "}
-              {currentVideo?.likes?.length}
+              {currentVideo?.likes.length}
             </Button>
-            <Button onClick={handleDislike}>
-              {currentVideo.dislikes?.includes(currentUser?._id) ? (
+            <Button onClick={() => handleDislike()}>
+              {currentVideo?.dislikes.includes(currentUser._id) ? (
                 <ThumbDownIcon />
               ) : (
                 <ThumbDownOffAltOutlinedIcon />
@@ -222,7 +241,7 @@ const Video = () => {
             </ChannelDetail>
           </ChannelInfo>
           <Subscribe onClick={handleSub}>
-            {currentUser.subscribedUsers?.includes(channel._id)
+            {currentUser.subscribedUsers.includes(channel._id)
               ? "SUBSCRIBED"
               : "SUBSCRIBE"}
           </Subscribe>

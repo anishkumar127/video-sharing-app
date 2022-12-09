@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../components/Card";
-
+import axiosInstance from "../axios";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -16,9 +16,7 @@ const Search = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(
-        `https://api-server-1edp.onrender.com/api/videos/search${query}`
-      );
+      const res = await axiosInstance.get(`/videos/search${query}`);
       setVideos(res.data);
     };
     fetchVideos();

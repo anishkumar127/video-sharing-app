@@ -23,7 +23,7 @@ const connectDB = () => {
     });
 };
 
-app.use(cors());
+// app.use(cors());
 // app.use(cors());
 // app.use(
 //   cors({
@@ -37,6 +37,40 @@ app.use(cors());
 //   })
 // );
 // routes
+
+// testing
+
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+//   })
+// );
+
+// app.use(function (req, res, next) {
+//   res.header("Content-Type", "application/json;charset=UTF-8");
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+// test 2nd
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//   })
+// );
+
+const corsOrigin = {
+  origin: "http://localhost:3000", //or whatever port your frontend is using
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOrigin));
+
 app.use(cookieParser());
 app.use(express.json());
 

@@ -6,6 +6,7 @@ import { loginStart, loginSuccess, loginFailure } from "../redux/userSlice.js";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../axios";
 
 const Container = styled.div`
   display: flex;
@@ -80,14 +81,17 @@ const SignIn = () => {
     dispatch(loginStart());
 
     try {
-      const res = await axios.post(
-        "https://api-server-1edp.onrender.com/api/auth/signin",
+      const res = await axiosInstance.post(
+        "/auth/signin",
         {
           name,
           password,
-        }
+        },
+        { withCredentials: true }
       );
+
       dispatch(loginSuccess(res.data));
+      console.log(res.data);
       navigate("/");
     } catch (err) {
       dispatch(loginFailure());
@@ -100,13 +104,14 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post(
-        "https://api-server-1edp.onrender.com/api/auth/signup",
+      const res = await axiosInstance.post(
+        "/auth/signup",
         {
           name,
           email,
           password,
-        }
+        },
+        { withCredentials: true }
       );
       dispatch(loginSuccess(res.data));
       navigate("/");
@@ -119,12 +124,16 @@ const SignIn = () => {
     dispatch(loginStart());
     signInWithPopup(auth, provider)
       .then((result) => {
-        axios
-          .post("https://api-server-1edp.onrender.com/api/auth/google", {
-            name: result.user.displayName,
-            email: result.user.email,
-            img: result.user.photoURL,
-          })
+        axiosInstance
+          .post(
+            "/auth/google",
+            {
+              name: result.user.displayName,
+              email: result.user.email,
+              img: result.user.photoURL,
+            },
+            { withCredentials: true }
+          )
           .then((res) => {
             dispatch(loginSuccess(res.data));
             navigate("/");
