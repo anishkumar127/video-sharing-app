@@ -50,12 +50,12 @@ const Comment = ({ comment }) => {
   }, [comment.userId]);
   return (
     <Container>
-      <Avatar src={channel.img} />
+      <Avatar src={channel?.img} />
       <Details>
         <Name>
-          {channel.name} <Date> {format(channel.createdAt)}</Date>
+          {channel?.name} <Date> {format(channel?.createdAt)}</Date>
         </Name>
-        <Text>{comment.desc}</Text>
+        <Text>{comment?.desc}</Text>
       </Details>
     </Container>
   );
