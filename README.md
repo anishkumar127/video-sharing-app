@@ -1,3 +1,12 @@
+
+### FrontEnd - 
+
+```https://video-sharing-app-yt.vercel.app/```
+
+### BackEnd - 
+
+```https://agreeable-bat-gown.cyclic.app/api/videos/random ```
+
 # 1. Auth API
 
 1. Sign IN API
