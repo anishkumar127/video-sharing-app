@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import Card from "../components/Card";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../axios";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -12,9 +13,9 @@ const Home = ({ type }) => {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(
-        `https://api-server-1edp.onrender.com/api/videos/${type}`
-      );
+      const res = await axiosInstance.get(`/videos/${type}`, {
+        withCredentials: true,
+      });
       setVideos(res.data);
     };
     fetchVideos();

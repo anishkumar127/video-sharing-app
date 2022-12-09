@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
@@ -10,9 +11,7 @@ const Recommendation = ({ tags }) => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(
-        `https://api-server-1edp.onrender.com/api/videos/tags?tags=${tags}`
-      );
+      const res = await axiosInstance.get(`/videos/tags?tags=${tags}`);
       setVideos(res.data);
     };
     fetchVideos();

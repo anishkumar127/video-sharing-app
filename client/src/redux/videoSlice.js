@@ -43,16 +43,10 @@ export const videoSlice = createSlice({
         );
       }
     },
-
-    views: (state, action) => {
-      if (state.currentVideo.views.includes(action.payload)) {
-        state.currentVideo.views.push(action.payload);
-      }
-    },
   },
 });
 
-export const { fetchStart, fetchSuccess, fetchFailure, like, dislike, views } =
+export const { fetchStart, fetchSuccess, fetchFailure, like, dislike } =
   videoSlice.actions;
 
 export default videoSlice.reducer;
